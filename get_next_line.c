@@ -6,11 +6,12 @@
 /*   By: fgomez-d <fgomez-d@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:34:15 by fgomez-d          #+#    #+#             */
-/*   Updated: 2023/01/10 21:38:06 by fgomez-d         ###   ########.fr       */
+/*   Updated: 2023/01/10 22:06:07 by fgomez-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 char	*extract_line(char *buf, char *line, char *aux, int count)
 {
@@ -29,7 +30,7 @@ int	count_until_endl(char *buf, int *count)
 	{
 		if (buf[*count] == '\n' || buf[*count] == '\0')
 			return (1);
-		count++;
+		*count += 1;
 	}
 	return (0);
 }
