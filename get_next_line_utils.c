@@ -6,7 +6,7 @@
 /*   By: fgomez-d <fgomez-d@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:40:44 by fgomez-d          #+#    #+#             */
-/*   Updated: 2023/01/10 21:20:35 by fgomez-d         ###   ########.fr       */
+/*   Updated: 2023/01/10 21:28:47 by fgomez-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*ft_strdup(const char *str)
 {
 	char	*newstr;
 
-	newstr = (char *) ft_calloc(ft_strlen(str) + 1, sizeof(char));
+	newstr = (char *) malloc(ft_strlen(str) + 1 * sizeof(char));
 	if (newstr == NULL)
 		return (NULL);
 	ft_strlcpy(newstr, str, ft_strlen(str) + 1);
