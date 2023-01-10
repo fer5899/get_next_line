@@ -6,7 +6,7 @@
 /*   By: fgomez-d <fgomez-d@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:34:15 by fgomez-d          #+#    #+#             */
-/*   Updated: 2023/01/10 21:36:43 by fgomez-d         ###   ########.fr       */
+/*   Updated: 2023/01/10 21:38:06 by fgomez-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*recursive_get_line(char *buf, char *line, char *aux, int fd)
 
 	if (buf[0] == '\0')
 		if (read(fd, buf, BUFFER_SIZE) < 1)
-			return (freeNULL);
+			return (free(line), free(aux), NULL);
 	count = 0;
 	endln_found = count_until_endl(buf, &count);
 	line = extract_line(buf, line, aux, count);
