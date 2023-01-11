@@ -6,7 +6,7 @@
 /*   By: fgomez-d <fgomez-d@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:34:15 by fgomez-d          #+#    #+#             */
-/*   Updated: 2023/01/11 13:13:57 by fgomez-d         ###   ########.fr       */
+/*   Updated: 2023/01/11 13:49:00 by fgomez-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,15 @@ int	count_until_endl(char *buf, char *line, int *count)
 {
 	while (*count - ft_strlen(line) < BUFFER_SIZE)
 	{
-		if (buf[*count - ft_strlen(line)] == '\n' || \
-			buf[*count - ft_strlen(line)] == '\0')
+		if (buf[*count - ft_strlen(line)] == '\n')
 		{
 			*count += 1;
 			return (1);
+		}
+		if (buf[*count - ft_strlen(line)] == '\0')
+		{
+			*count += 1;
+			return (2);
 		}
 		*count += 1;
 	}
@@ -55,31 +59,33 @@ char	*recursive_get_line(char *buf, char *line, int fd, int *count)
 	int			endln_found;
 
 	if (buf[0] == '\0')
-		if (read(fd, buf, BUFFER_SIZE) < 1)
+		if (read(fd, buf, BUFFER_SIZE) < 1 && line[0] == '\0')
 			return (free(line), NULL);
-
-	write(1, "\nbuffer: ", 10);
-	write(1, buf, BUFFER_SIZE);
+	if (buf[0] == '\0')
+		return (line);
+	// write(1, "\nbuffer: ", 10);
+	// write(1, buf, BUFFER_SIZE);
 
 	// Count until endl or end of buffer
 	endln_found = count_until_endl(buf, line, count);
 	
-	write(1, "\ncount: ", 9);
-	ft_putnbr_fd(*count, 1);
-	write(1, "\n--- before ---\n", 17);
-	write(1, line, ft_strlen(line));
+	// write(1, "\ncount: ", 9);
+	// ft_putnbr_fd(*count, 1);
+	// write(1, "\n--- before ---\n", 17);
+	// write(1, line, ft_strlen(line));
 	
 	// Join buffer to line
 	line = ft_strjoin(line, ft_substr(buf, 0, *count - ft_strlen(line)));
 	
-	write(1, "\n--- after ---\n", 16);
-	write(1, line, ft_strlen(line));
-	write(1, "\n ---\n\n", 7);
+	// write(1, "\n--- after ---\n", 16);
+	// write(1, line, ft_strlen(line));
+	// write(1, "\n ---\n\n", 7);
 	
-	
-	if (!endln_found)
+	if (endln_found == 2)
+		return (ft_bzero(buf, BUFFER_SIZE), line);
+
+	if (!endln_found && BUFFER_SIZE <= ft_strlen(line))
 		return (ft_bzero(buf, BUFFER_SIZE), recursive_get_line(buf, line, fd, count));	
-	
 	return (line);
 }
 
@@ -103,7 +109,5 @@ char	*get_next_line(int fd)
 	}
 	else
 		ft_bzero(buf, BUFFER_SIZE);
-	write(1, buf, BUFFER_SIZE);
-	// write(1, line, ft_strlen(line));
 	return (line);
 }
