@@ -6,7 +6,7 @@
 /*   By: fgomez-d <fgomez-d@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:34:15 by fgomez-d          #+#    #+#             */
-/*   Updated: 2023/01/10 22:06:07 by fgomez-d         ###   ########.fr       */
+/*   Updated: 2023/01/11 10:24:30 by fgomez-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ int	count_until_endl(char *buf, int *count)
 	while (*count < BUFFER_SIZE)
 	{
 		if (buf[*count] == '\n' || buf[*count] == '\0')
+		{
+			*count += 1;
 			return (1);
+		}
 		*count += 1;
 	}
 	return (0);
