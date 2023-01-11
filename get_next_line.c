@@ -6,7 +6,7 @@
 /*   By: fgomez-d <fgomez-d@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:34:15 by fgomez-d          #+#    #+#             */
-/*   Updated: 2023/01/11 10:24:30 by fgomez-d         ###   ########.fr       */
+/*   Updated: 2023/01/11 10:58:40 by fgomez-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	count_until_endl(char *buf, int *count)
 	return (0);
 }
 
-char	*recursive_get_line(char *buf, char *line, char *aux, int fd)
+char	*recursive_get_line(char *buf, char *line, char *aux, int fd, int count)
 {
 	int			count;
 	int			endln_found;
@@ -52,7 +52,7 @@ char	*recursive_get_line(char *buf, char *line, char *aux, int fd)
 	if (!endln_found)
 	{
 		aux = ft_strdup(line);
-		recursive_get_line(buf, line, aux, fd);
+		recursive_get_line(buf, line, aux, fd, count);
 	}
 	return (line);
 }
@@ -67,5 +67,5 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = malloc(1);
 	aux = malloc(1);
-	return (recursive_get_line(buf, line, aux, fd));
+	return (recursive_get_line(buf, line, aux, fd, 0));
 }
