@@ -6,7 +6,7 @@
 /*   By: fgomez-d <fgomez-d@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:34:15 by fgomez-d          #+#    #+#             */
-/*   Updated: 2023/01/12 11:13:04 by fgomez-d         ###   ########.fr       */
+/*   Updated: 2023/01/12 11:33:17 by fgomez-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,10 @@ char	*recursive_get_line(char *buf, char *line, int fd, int *line_len)
 	{
 		ft_bzero(buf, BUFFER_SIZE);
 		new_line = recursive_get_line(buf, new_line, fd, line_len);
-		free(line);
-		free(subbuf);
+		
 	}
+	free(line);
+	free(subbuf);
 	return (new_line);
 }
 
@@ -62,6 +63,7 @@ char	*get_next_line(int fd)
 	static char	buf[BUFFER_SIZE];
 	char		*line;
 	int			line_len;
+	int			line_leftover;
 
 	if (BUFFER_SIZE < 1)
 		return (NULL);
@@ -69,12 +71,16 @@ char	*get_next_line(int fd)
 	ft_bzero(line, 1);
 	line_len = 0;
 	line = recursive_get_line(buf, line, fd, &line_len);
-	if (BUFFER_SIZE >= ft_strlen(line))
+	if (BUFFER_SIZE >= line_len)
 	{
 		ft_memmove(buf, buf + line_len, BUFFER_SIZE - line_len);
 		buf[BUFFER_SIZE - line_len] = '\0';
 	}
 	else
-		ft_bzero(buf, BUFFER_SIZE);
+	{
+		line_leftover = line_len % BUFFER_SIZE;
+		ft_memmove(buf, buf + line_leftover, BUFFER_SIZE - line_leftover);
+		buf[line_leftover] = '\0';
+	}
 	return (line);
 }
