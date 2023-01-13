@@ -6,7 +6,7 @@
 /*   By: fgomez-d <fgomez-d@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:34:47 by fgomez-d          #+#    #+#             */
-/*   Updated: 2023/01/12 11:13:04 by fgomez-d         ###   ########.fr       */
+/*   Updated: 2023/01/12 21:51:10 by fgomez-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int		ft_strlen(const char *str);
 int		ft_strlcpy(char *dest, const char *src, size_t size);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 char	*ft_strdup(const char *str);
-char	*recursive_get_line(char *buf, char *line, int fd, int *line_len);
-int		count_until_endl(char *buf, char *line, int *line_len);
+char	*recursive_get_line(char *buf, char *line, int fd);
+int		count_until_endl(char *buf, int *line_len);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_strlcat(char *dest, const char *src, size_t size);
 char	*ft_strjoin(char const *s1, char const *s2);
