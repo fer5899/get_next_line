@@ -6,7 +6,7 @@
 /*   By: fgomez-d <fgomez-d@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:40:44 by fgomez-d          #+#    #+#             */
-/*   Updated: 2023/01/11 13:58:16 by fgomez-d         ###   ########.fr       */
+/*   Updated: 2023/01/13 12:19:24 by fgomez-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,6 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 		}
 	}
 	return (ptr_dest);
-}
-
-char	*ft_strdup(const char *str)
-{
-	char	*newstr;
-
-	newstr = (char *) malloc((ft_strlen(str) + 1) * sizeof(char));
-	if (newstr == NULL)
-		return (NULL);
-	ft_strlcpy(newstr, str, ft_strlen(str) + 1);
-	return (newstr);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)

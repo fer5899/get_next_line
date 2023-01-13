@@ -6,54 +6,11 @@
 /*   By: fgomez-d <fgomez-d@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:34:15 by fgomez-d          #+#    #+#             */
-/*   Updated: 2023/01/13 12:08:35 by fgomez-d         ###   ########.fr       */
+/*   Updated: 2023/01/13 12:22:11 by fgomez-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-// BORRAR
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
-void	ft_putstr_fd(char *s, int fd)
-{
-	while (*s != '\0')
-	{
-		write(fd, s, 1);
-		s++;
-	}
-}
-void	ft_putstrn_fd(char *s, int len, int fd)
-{
-	int	i;
-
-	i = 0;
-	if (len < 0)
-		len = 0;
-	while (i < len)
-	{
-		write(fd, &s[i], 1);
-		i++;
-	}
-}
-void	ft_putnbr_fd(long n, int fd)
-{
-	if (n < 0)
-	{
-		ft_putchar_fd('-', fd);
-		n *= -1;
-	}
-	if (n < 10)
-		ft_putchar_fd(n + '0', fd);
-	else
-	{
-		ft_putnbr_fd(n / 10, fd);
-		ft_putnbr_fd(n % 10, fd);
-	}
-}
-// ---------------------------
 
 int	count_until_endl(char *buf, int *line_len)
 {
