@@ -6,7 +6,7 @@
 /*   By: fgomez-d <fgomez-d@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:40:44 by fgomez-d          #+#    #+#             */
-/*   Updated: 2023/01/13 12:19:24 by fgomez-d         ###   ########.fr       */
+/*   Updated: 2023/01/13 12:35:50 by fgomez-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (newstr);
 }
 
-int	ft_strlcat(char *dest, const char *src, size_t size)
+int	ft_strlcat(char *dest, char *src, size_t size)
 {
 	size_t		i;
 	size_t		destlen;
@@ -107,7 +107,7 @@ int	ft_strlcat(char *dest, const char *src, size_t size)
 	return ((int) destlen + ft_strlen(src));
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char *s2)
 {
 	char	*catstr;
 	int		s1len;
@@ -118,6 +118,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	ft_strlcpy(catstr, s1, s1len + 1);
 	ft_strlcat(catstr, s2, s1len + ft_strlen(s2) + 1);
+	free(s2);
 	return (catstr);
 }
 
