@@ -6,7 +6,7 @@
 /*   By: fgomez-d <fgomez-d@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:40:44 by fgomez-d          #+#    #+#             */
-/*   Updated: 2023/01/13 13:50:44 by fgomez-d         ###   ########.fr       */
+/*   Updated: 2023/01/13 14:44:25 by fgomez-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,20 @@ int	ft_strlen(const char *str)
 	return (i);
 }
 
-int	ft_strlcpy(char *dest, const char *src, size_t size)
+void	ft_strlcpy(char *dest, const char *src, size_t size)
 {
 	size_t	i;
-	int		srclen;
 
 	i = 0;
-	srclen = ft_strlen(src);
 	if (size > 0)
 	{
-		while (src[i] != '\0' && i < size - 1)
+		while (i < size - 1)
 		{
 			dest[i] = src[i];
 			i++;
 		}
 		dest[i] = '\0';
 	}
-	return (srclen);
 }
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
@@ -76,10 +73,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (s == NULL)
 		return (NULL);
-	if (start >= (unsigned int) ft_strlen(s))
-		start = (unsigned int) ft_strlen(s);
-	if (len > (unsigned int) ft_strlen(s) - start)
-		len = (unsigned int) ft_strlen(s) - start;
+	if (start >= (unsigned int) BUFFER_SIZE)
+		start = (unsigned int) BUFFER_SIZE;
+	if (len > (unsigned int) BUFFER_SIZE - start)
+		len = (unsigned int) BUFFER_SIZE - start;
 	newstr = (char *) malloc((len + 1) * sizeof(char));
 	if (newstr == NULL)
 		return (NULL);
@@ -95,10 +92,12 @@ char	*ft_strjoin(char const *s1, char *s2)
 	size_t	j;
 	size_t	destlen;
 
+	if (s2 == NULL)
+		return (NULL);
 	size = ft_strlen(s1) + ft_strlen(s2) + 1;
 	catstr = (char *) malloc(size);
 	if (catstr == NULL)
-		return (NULL);
+		return (free(s2), NULL);
 	ft_strlcpy(catstr, s1, ft_strlen(s1) + 1);
 	i = 0;
 	destlen = ft_strlen(catstr);

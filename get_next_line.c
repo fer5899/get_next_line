@@ -6,7 +6,7 @@
 /*   By: fgomez-d <fgomez-d@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:34:15 by fgomez-d          #+#    #+#             */
-/*   Updated: 2023/01/13 13:50:50 by fgomez-d         ###   ########.fr       */
+/*   Updated: 2023/01/13 14:51:20 by fgomez-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,26 +55,29 @@ char	*recursive_get_ln(char *buf, char *ln, int fd, int subbuf_len)
 {
 	int			endln_found;
 	char		*new_ln;
+	int			chars_read;
 
 	if (buf[0] == '\0')
 	{
-		if (read(fd, buf, BUFFER_SIZE) < 1)
+		chars_read = read(fd, buf, BUFFER_SIZE);
+		if (chars_read < 1)
 		{
-			if (ln[0] == '\0')
+			if (chars_read == -1 || ln[0] == '\0')
 				return (ft_bzero(buf, BUFFER_SIZE), free(ln), NULL);
 			else
-				return (ln);
+				return (ft_bzero(buf, BUFFER_SIZE), ln);
 		}
 	}
 	endln_found = count_until_endl(buf, &subbuf_len);
 	new_ln = ft_strjoin(ln, ft_substr(buf, 0, subbuf_len));
+	if (new_ln == NULL)
+		return (free(ln), NULL);
 	if (endln_found == 0)
 		return (ft_bzero(buf, BUFFER_SIZE), free(ln), \
 				recursive_get_ln(buf, new_ln, fd, 0));
 	else
 		update_buf(buf, subbuf_len, endln_found);
-	free(ln);
-	return (new_ln);
+	return (free(ln), new_ln);
 }
 
 char	*get_next_line(int fd)
@@ -85,6 +88,8 @@ char	*get_next_line(int fd)
 	if (BUFFER_SIZE < 1)
 		return (NULL);
 	line = malloc(1);
+	if (line == NULL)
+		return (NULL);
 	ft_bzero(line, 1);
 	line = recursive_get_ln(buf, line, fd, 0);
 	return (line);

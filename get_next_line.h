@@ -6,7 +6,7 @@
 /*   By: fgomez-d <fgomez-d@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:34:47 by fgomez-d          #+#    #+#             */
-/*   Updated: 2023/01/13 13:52:08 by fgomez-d         ###   ########.fr       */
+/*   Updated: 2023/01/13 14:07:12 by fgomez-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 char	*get_next_line(int fd);
 int		ft_strlen(const char *str);
-int		ft_strlcpy(char *dest, const char *src, size_t size);
+void	ft_strlcpy(char *dest, const char *src, size_t size);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 char	*recursive_get_ln(char *buf, char *ln, int fd, int subbuf_len);
 int		count_until_endl(char *buf, int *ln_len);
