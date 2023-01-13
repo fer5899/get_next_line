@@ -6,11 +6,26 @@
 /*   By: fgomez-d <fgomez-d@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:34:15 by fgomez-d          #+#    #+#             */
-/*   Updated: 2023/01/13 12:54:00 by fgomez-d         ###   ########.fr       */
+/*   Updated: 2023/01/13 13:50:50 by fgomez-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+void	*ft_bzero(void *s, size_t n)
+{
+	unsigned char	*ptr;
+	size_t			i;
+
+	ptr = (unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		ptr[i] = (unsigned char)0;
+		i++;
+	}
+	return (ptr);
+}
 
 int	count_until_endl(char *buf, int *ln_len)
 {
@@ -61,7 +76,6 @@ char	*recursive_get_ln(char *buf, char *ln, int fd, int subbuf_len)
 	free(ln);
 	return (new_ln);
 }
-
 
 char	*get_next_line(int fd)
 {

@@ -6,12 +6,16 @@
 /*   By: fgomez-d <fgomez-d@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:34:47 by fgomez-d          #+#    #+#             */
-/*   Updated: 2023/01/13 12:54:32 by fgomez-d         ###   ########.fr       */
+/*   Updated: 2023/01/13 13:52:08 by fgomez-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1000
+# endif
 
 # define MAX_FD 256 // execute "launchctl limit maxfiles" to check fd limit
 
@@ -25,13 +29,8 @@ void	*ft_memmove(void *dest, const void *src, size_t n);
 char	*recursive_get_ln(char *buf, char *ln, int fd, int subbuf_len);
 int		count_until_endl(char *buf, int *ln_len);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-int		ft_strlcat(char *dest, char *src, size_t size);
 char	*ft_strjoin(char const *s1, char *s2);
 void	*ft_bzero(void *s, size_t n);
 void	update_buf(char *buf, int subbuf_len, int endln_found);
 
-#endif
-
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1000
 #endif

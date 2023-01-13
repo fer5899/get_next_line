@@ -6,7 +6,7 @@
 /*   By: fgomez-d <fgomez-d@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:40:44 by fgomez-d          #+#    #+#             */
-/*   Updated: 2023/01/13 12:35:50 by fgomez-d         ###   ########.fr       */
+/*   Updated: 2023/01/13 13:50:44 by fgomez-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,52 +87,29 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (newstr);
 }
 
-int	ft_strlcat(char *dest, char *src, size_t size)
-{
-	size_t		i;
-	size_t		destlen;
-
-	i = 0;
-	destlen = ft_strlen(dest);
-	if (size > destlen)
-	{
-		while (*dest != '\0')
-			dest++;
-		while (src[i] != '\0' && i < size - destlen - 1)
-			*(dest++) = src[i++];
-		*dest = '\0';
-	}
-	if (size < destlen)
-		return ((int) size + ft_strlen(src));
-	return ((int) destlen + ft_strlen(src));
-}
-
 char	*ft_strjoin(char const *s1, char *s2)
 {
 	char	*catstr;
-	int		s1len;
+	size_t	size;
+	size_t	i;
+	size_t	j;
+	size_t	destlen;
 
-	s1len = ft_strlen(s1);
-	catstr = (char *) malloc((s1len + ft_strlen(s2) + 1) * sizeof(char));
+	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	catstr = (char *) malloc(size);
 	if (catstr == NULL)
 		return (NULL);
-	ft_strlcpy(catstr, s1, s1len + 1);
-	ft_strlcat(catstr, s2, s1len + ft_strlen(s2) + 1);
-	free(s2);
-	return (catstr);
-}
-
-void	*ft_bzero(void *s, size_t n)
-{
-	unsigned char	*ptr;
-	size_t			i;
-
-	ptr = (unsigned char *)s;
+	ft_strlcpy(catstr, s1, ft_strlen(s1) + 1);
 	i = 0;
-	while (i < n)
+	destlen = ft_strlen(catstr);
+	j = destlen;
+	while (s2[i] != '\0' && i < size - destlen - 1)
 	{
-		ptr[i] = (unsigned char)0;
+		catstr[j] = s2[i];
+		j++;
 		i++;
 	}
-	return (ptr);
+	catstr[j] = '\0';
+	free(s2);
+	return (catstr);
 }
