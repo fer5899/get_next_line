@@ -6,7 +6,7 @@
 /*   By: fgomez-d <fgomez-d@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:34:47 by fgomez-d          #+#    #+#             */
-/*   Updated: 2023/01/13 14:07:12 by fgomez-d         ###   ########.fr       */
+/*   Updated: 2023/01/16 18:40:40 by fgomez-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1000
 # endif
-
-# define MAX_FD 256 // execute "launchctl limit maxfiles" to check fd limit
 
 # include <unistd.h>
 # include <stdlib.h>
